@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { useDatepicker, START_DATE } from "@datepicker-react/hooks";
+import { useState } from 'react';
+import { useDatepicker, START_DATE } from '@datepicker-react/hooks';
 
-import Month from "./Month";
-import NavButton from "./NavButton";
-import DatepickerContext from "./datepickerContext";
+import Month from './Month';
+import NavButton from './NavButton';
+import DatepickerContext from './datepickerContext';
+import styled from 'styled-components';
 
 function Datepicker() {
   const [state, setState] = useState({
@@ -70,15 +71,7 @@ function Datepicker() {
       <NavButton onClick={goToPreviousMonths}>Previous</NavButton>
       <NavButton onClick={goToNextMonths}>Next</NavButton>
 
-      <div
-        css={{
-          display: "grid",
-          margin: "32px 0 0",
-          gridTemplateColumns: `repeat(${activeMonths.length}, 300px)`,
-          gridGap: "0 64px",
-          border: "1px solid red",
-        }}
-      >
+      <MonthWrapper>
         {activeMonths.map((month) => (
           <Month
             key={`${month.year}-${month.month}`}
@@ -87,9 +80,14 @@ function Datepicker() {
             firstDayOfWeek={firstDayOfWeek}
           />
         ))}
-      </div>
+      </MonthWrapper>
     </DatepickerContext.Provider>
   );
 }
 
 export default Datepicker;
+
+const MonthWrapper = styled.div`
+  border: 1px solid red;
+  display: flex;
+`;
